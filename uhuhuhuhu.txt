@@ -1,0 +1,20 @@
+Private Sub Command1_Click()
+If Text1.Text = "" Then
+MsgBox "LENGKAPI DATA YANG INGIN ANDA CETAK CETAK!", vbInformation, "INFORMASI"
+Else
+CrystalReport1.ReportFileName = App.Path & "\absen.rpt"
+'CrystalReport1.Connect = "DSN=dsnmahasiswa;UID=sa;PWD=as;database=akademik"
+CrystalReport1.WindowState = crptMaximized
+CrystalReport1.WindowShowProgressCtls = True
+CrystalReport1.WindowShowRefreshBtn = True
+CrystalReport1.WindowShowPrintBtn = True
+CrystalReport1.RetrieveDataFiles
+CrystalReport1.SelectionFormula = "{absensi.NIM}='" & Text2.Text & "' And Year({absensi.tanggal}) = " & Val(Text1.Text) & " and {absensi.mata_kuliah} = '" & (Combo1.Text) & "'"
+
+'CrystalReport1.SelectionFormula = "{absensi.nipy}='" & Text2.Text & "' and Month({absensi.tanggal}) = " & Val(Combo1.Text) & " And Year({absensi.tanggal}) = " & Val(Text1.Text) & ""
+
+'CrystalReport1.SelectionFormula = "Month({absensi.tanggal}) = " & Val(Combo1.Text) & " And Year({absensi.tanggal}) = " & Val(Text1.Text) & ""
+
+CrystalReport1.Action = 1
+End If
+End Sub
